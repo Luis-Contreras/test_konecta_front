@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const get = async () => {
-  const res = await axios.get("http://localhost/test_konecta/api/actions");
+  const res = await axios.get("http://localhost/konecta_test/api/actions");
   if (res.status === 200) {
     return res?.data?.result;
   }

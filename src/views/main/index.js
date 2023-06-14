@@ -10,6 +10,7 @@ import { post } from "../../services/post";
 import { validateFields } from "../../tools/validateFields";
 import { put } from "../../services/put";
 import FormSale from "../formSale";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const [data, setData] = useState([]);
@@ -20,6 +21,7 @@ const Main = () => {
   const [isCreate, setIsCreate] = useState(false);
   const [formData, setFormData] = useState({});
   const [dataSale, setDataSale] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getData = async () => {
@@ -129,15 +131,13 @@ const Main = () => {
           width: "100%",
           justifyContent: "end",
           marginBottom: 20,
-        }}
-      >
+        }}>
         <Button
           type="primary"
           onClick={() => {
             setIsCreate(true);
             setModalCreateUpdate(true);
-          }}
-        >
+          }}>
           Crear Producto
         </Button>
         <Button
@@ -146,9 +146,16 @@ const Main = () => {
           danger
           onClick={() => {
             setModalSale(true);
-          }}
-        >
+          }}>
           Crear Venta
+        </Button>
+        <Button
+          style={{ marginLeft: 5 }}
+          type=""
+          onClick={() => {
+            navigate("/sales");
+          }}>
+          Ver Ventas
         </Button>
       </div>
 
@@ -161,8 +168,7 @@ const Main = () => {
         isModalOpen={modalDelete}
         setIsModalOpen={setModalDelete}
         actionOk={() => deleteProduct()}
-        labelAction={"Eliminar"}
-      >
+        labelAction={"Eliminar"}>
         Esta seguro que desea eliminar este producto?
       </Modal>
       <Modal
@@ -174,8 +180,7 @@ const Main = () => {
         actionCancel={() => {
           setFormData({});
           setIsCreate(false);
-        }}
-      >
+        }}>
         <Form formData={formData} setFormData={setFormData} />
       </Modal>
       <Modal
@@ -187,8 +192,7 @@ const Main = () => {
         actionCancel={() => {
           setDataSale({});
           setModalSale(false);
-        }}
-      >
+        }}>
         <FormSale data={data} dataSale={dataSale} setDataSale={setDataSale} />
       </Modal>
     </div>
